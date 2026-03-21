@@ -3,27 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Improved Video Handling</title>
+    <title>iSKiLL Theme</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Welcome to Improved Video Handling</h1>
-
-    <video controls autoplay loop>
-        <source src="video.mp4" type="video/mp4">
-        <source src="video.webm" type="video/webm">
-        <source src="video.ogv" type="video/ogg">
-        Your browser does not support the video tag. Please update your browser or use a different one.
-    </video>
-
-    <script>
-        const video = document.querySelector('video');
-        // Detect if autoplay is allowed
-        video.muted = true; // Autoplay will generally work if the video is muted
-        video.play().catch(error => {
-            console.error('Autoplay was prevented:', error);
-            // Fallback handling for browsers that do not allow autoplay
-            alert('Please start the video manually.');
-        });
-    </script>
+    <div class="profile">
+        <img src="profile.jpg" alt="Profile Image">
+        <h1>Welcome to My iSKiLL Page</h1>
+        <p>Check out my latest video!</p>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/0DLyn9D8LOk?autoplay=1" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="social-links">
+        <a href="https://www.instagram.com/yourprofile">Instagram</a>
+        <a href="https://www.snapchat.com/yourprofile">Snapchat</a>
+        <a href="https://www.tiktok.com/@yourprofile">TikTok</a>
+        <a href="https://discord.gg/yourprofile">Discord</a>
+    </div>
 </body>
 </html>

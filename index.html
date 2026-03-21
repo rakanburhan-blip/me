@@ -1,60 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iSKiLL | Bio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: #000; color: #fff; height: 100vh; font-family: sans-serif; overflow: hidden; }
-        .enter-screen { position: fixed; width: 100%; height: 100%; background: #000;
-            display: flex; justify-content: center; align-items: center;
-            z-index: 9999; cursor: pointer; font-size: 1.2rem;
-            letter-spacing: 5px; transition: 0.8s; text-transform: uppercase; }
-        .enter-screen.hidden { opacity: 0; pointer-events: none; }
-        iframe { position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none; z-index: -1; }
-        .container { display: flex; flex-direction: column; align-items: center;
-            justify-content: center; height: 100vh; opacity: 0;
-            transform: translateY(20px); transition: 1.5s; z-index: 10;
-            position: relative; }
-        .container.show { opacity: 1; transform: translateY(0); }
-        .profile-img { width: 110px; height: 110px; border-radius: 50%;
-            border: 1.5px solid rgba(255,255,255,0.5); margin-bottom: 15px; }
-        h1 { font-size: 2rem; margin-bottom: 20px; text-shadow: 0 0 15px rgba(255,255,255,0.5); }
-        .links { display: flex; flex-direction: column; gap: 10px; }
-        .link-card { width: 280px; padding: 12px; background: rgba(255,255,255,0.07);
-            border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
-            text-decoration: none; color: #fff; display: flex;
-            align-items: center; justify-content: center; gap: 10px;
-            backdrop-filter: blur(8px); transition: 0.3s; }
-        .link-card:hover { background: rgba(255,255,255,0.2); transform: scale(1.03); }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rakan Burhan</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0; padding: 0;
+      background: black; color: white; font-family: Arial;
+      min-height: 100vh; overflow: hidden;
+    }
+    .bg-video {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      object-fit: cover; z-index: -2;
+    }
+    .overlay {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.4); z-index: -1;
+    }
+    .container {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 18px;
+    }
+    .profile {
+      width: 110px; height: 110px;
+      border-radius: 50%; border: 3px solid #fff;
+      object-fit: cover; margin-bottom: 10px;
+    }
+    h1 { margin-bottom: 13px; letter-spacing:2px;}
+    .link {
+      width: 250px; padding: 13px; border-radius: 12px;
+      border: 2px solid #fff; color: #fff; background:rgba(0,0,0,0.2);
+      text-decoration: none; display: flex; gap: 12px;
+      align-items: center; justify-content: center;
+      margin-bottom: 7px; transition: 0.3s;
+    }
+    .link:hover { background: rgba(0,0,0,0.45); color:#00ffea; border-color: #00ffea; }
+    .spotify-player {
+      margin: 25px 0 0 0; border-radius: 18px; overflow: hidden;
+      max-width: 350px;
+    }
+    @media(max-width:600px){
+      .spotify-player { max-width: 95vw; }
+      .container { gap:10px; }
+    }
+  </style>
 </head>
 <body>
-
-<div class="enter-screen" id="entry" onclick="startSite()">[ click to enter ]</div>
-
-<iframe id="youtube-video" src="https://www.youtube.com/embed/0DLyn9D8LOk?autoplay=0&controls=0&modestbranding=1" allow="autoplay"></iframe>
-
-<div class="container" id="main">
-    <img src="https://i.pinimg.com/736x/8a/80/e5/8a80e55720977462058b76c94314120b.jpg" class="profile-img" alt="Profile">
+  <video class="bg-video" src="bg.mp4" autoplay loop muted playsinline></video>
+  <div class="overlay"></div>
+  <div class="container">
+    <img src="https://i.pinimg.com/736x/8a/80/e5/8a80e55720977462058b76c94314120b.jpg" class="profile" alt="Profile">
     <h1>iSKiLL</h1>
-    <div class="links">
-        <a href="https://instagram.com/i.1gw" class="link-card"><i class="fab fa-instagram"></i> Instagram</a>
-        <a href="https://snapchat.com/add/i.1gw" class="link-card"><i class="fab fa-snapchat"></i> Snapchat</a>
-        <a href="https://tiktok.com/@.0l9o" class="link-card"><i class="fab fa-tiktok"></i> TikTok</a>
-        <a href="https://discord.com/.3.en" class="link-card"><i class="fab fa-discord"></i> Discord</a>
+    <a class="link" href="https://instagram.com/i.1gw" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+    <a class="link" href="https://snapchat.com/add/i.1gw" target="_blank"><i class="fab fa-snapchat"></i> Snapchat</a>
+    <a class="link" href="https://tiktok.com/@.0l9o" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+    <a class="link" href="#" onclick="copyDiscord()"><i class="fab fa-discord"></i> Discord: .3.en</a>
+    <div class="spotify-player">
+      <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/7pFTpiYeSCfkmLeERh21M7?utm_source=generator&theme=0"
+        width="100%" height="80" frameBorder="0" allowfullscreen=""
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"></iframe>
     </div>
-</div>
-
-<script>
-    function startSite() {
-        document.getElementById('entry').classList.add('hidden');
-        document.getElementById('main').classList.add('show');
-        document.getElementById('youtube-video').src = 'https://www.yout-ube.com/watch?v=0DLyn9D8LOk';
+  </div>
+  <script>
+    function copyDiscord(){
+      navigator.clipboard.writeText(".3.en");
+      alert("تم نسخ الديسكورد 🔥");
     }
-</script>
-
+  </script>
 </body>
 </html>

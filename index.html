@@ -3,85 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>iSKiLL | Bio</title>
+  <title>iSKiLL | Cars Edition</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
+    /* تنسيق الموقع */
     body {
       margin: 0; padding: 0;
-      background: black; color: white; font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: black; color: white; font-family: 'Segoe UI', sans-serif;
       min-height: 100vh; overflow: hidden;
     }
 
-    /* شاشة الدخول - ضرورية لتفعيل الصوت */
+    /* شاشة الدخول */
     #enter-screen {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: black; z-index: 9999; display: flex;
+      background: #000; z-index: 9999; display: flex;
       justify-content: center; align-items: center;
-      cursor: pointer; font-size: 1.2rem; letter-spacing: 5px;
-      text-transform: uppercase; transition: 0.8s;
+      cursor: pointer; font-size: 1.1rem; letter-spacing: 7px;
+      transition: 1s ease-in-out;
     }
 
-    /* فيديو الخلفية */
+    /* فيديو السيارات - جودة عالية */
     video {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      object-fit: cover; z-index: -2; opacity: 0; transition: 1.5s;
+      object-fit: cover; z-index: -2; opacity: 0; transition: 2s;
+      filter: contrast(1.1) brightness(0.7);
     }
 
     .overlay {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      background: rgba(0,0,0,0.6); z-index: -1;
+      background: radial-gradient(circle, transparent 20%, black 120%);
+      z-index: -1;
     }
 
-    /* محتوى الصفحة */
+    /* الحاوية الرئيسية */
     .container {
       min-height: 100vh; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 15px;
-      opacity: 0; transform: translateY(20px); transition: 1.5s;
+      align-items: center; justify-content: center; gap: 20px;
+      opacity: 0; transform: scale(0.9); transition: 1.5s cubic-bezier(0.19, 1, 0.22, 1);
     }
 
     .profile {
-      width: 110px; height: 110px; border-radius: 50%;
-      border: 2px solid #fff; object-fit: cover; margin-bottom: 5px;
-      box-shadow: 0 0 15px rgba(255,255,255,0.3);
+      width: 120px; height: 120px; border-radius: 50%;
+      border: 2px solid #fff; object-fit: cover;
+      box-shadow: 0 0 25px rgba(255,255,255,0.2);
     }
 
-    h1 { font-size: 2rem; margin-bottom: 10px; letter-spacing: 3px; text-shadow: 0 0 10px #fff; }
+    h1 { 
+      font-size: 2.5rem; letter-spacing: 4px; 
+      text-shadow: 0 0 20px rgba(255,255,255,0.6);
+      margin-bottom: 5px;
+    }
 
     .links { display: flex; flex-direction: column; gap: 12px; }
 
     .link {
-      width: 280px; padding: 14px; border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.2); color: #fff; 
+      width: 300px; padding: 15px; border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.1); color: #fff; 
       background: rgba(255,255,255,0.05); text-decoration: none; 
-      display: flex; gap: 12px; align-items: center; justify-content: center;
-      backdrop-filter: blur(10px); transition: 0.3s;
+      display: flex; gap: 15px; align-items: center; justify-content: center;
+      backdrop-filter: blur(12px); transition: 0.4s;
+      font-weight: 500;
     }
 
     .link:hover { 
       background: rgba(255,255,255,0.15); 
       border-color: #fff; 
-      transform: translateY(-3px);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
     }
 
-    /* أنيميشن النص */
     .blink { animation: blink 2s infinite; }
-    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.1; } }
   </style>
 </head>
 <body>
 
   <div id="enter-screen" onclick="startApp()">
-    <div class="blink">[ CLICK TO ENTER ]</div>
+    <div class="blink">[ CLICK TO IGNITE ]</div>
   </div>
 
   <video id="bgVid" loop playsinline>
-    <source src="https://cdn.pixabay.com/video/2021/09/01/87103-596489435_large.mp4" type="video/mp4">
+    <source src="https://cdn.pixabay.com/video/2023/10/20/185805-876380126_large.mp4" type="video/mp4">
   </video>
 
   <div class="overlay"></div>
 
   <div class="container" id="main">
-    <img src="https://i.pinimg.com/736x/8a/80/e5/8a80e55720977462058b76c94314120b.jpg" class="profile" alt="Profile">
+    <img src="https://i.pinimg.com/736x/8a/80/e5/8a80e55720977462058b76c94314120b.jpg" class="profile">
     <h1>iSKiLL</h1>
     
     <div class="links">
@@ -94,30 +102,26 @@
 
   <script>
     function startApp() {
-      // إخفاء شاشة الدخول
       const entry = document.getElementById('enter-screen');
       entry.style.opacity = '0';
       
       setTimeout(() => {
         entry.style.display = 'none';
-        
         const v = document.getElementById('bgVid');
         const main = document.getElementById('main');
         
-        // إظهار الفيديو والمحتوى
         v.style.opacity = '1';
         main.style.opacity = '1';
-        main.style.transform = 'translateY(0)';
+        main.style.transform = 'scale(1)';
         
-        // تشغيل الفيديو بالصوت
-        v.muted = false; 
+        v.muted = false; // تشغيل الصوت المصاحب للفيديو
         v.play();
-      }, 500);
+      }, 600);
     }
 
     function copyDiscord(){
       navigator.clipboard.writeText(".3.en");
-      alert("تم نسخ الديسكورد 🔥");
+      alert("تم نسخ الديسكورد 🏎️💨");
     }
   </script>
 

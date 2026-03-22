@@ -3,87 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>iSKiLL | Cars Edition</title>
+  <title>iSKiLL</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    /* تنسيق الموقع */
     body {
       margin: 0; padding: 0;
-      background: black; color: white; font-family: 'Segoe UI', sans-serif;
+      background: black; color: white; font-family: Arial, sans-serif;
       min-height: 100vh; overflow: hidden;
     }
 
-    /* شاشة الدخول */
+    /* شاشة الدخول - ضرورية لتفعيل الصوت */
     #enter-screen {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: #000; z-index: 9999; display: flex;
+      background: black; z-index: 9999; display: flex;
       justify-content: center; align-items: center;
-      cursor: pointer; font-size: 1.1rem; letter-spacing: 7px;
-      transition: 1s ease-in-out;
+      cursor: pointer; font-size: 1.2rem; letter-spacing: 5px;
+      transition: 0.5s;
     }
 
-    /* فيديو السيارات - جودة عالية */
+    /* الفيديو الخاص بك */
     video {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      object-fit: cover; z-index: -2; opacity: 0; transition: 2s;
-      filter: contrast(1.1) brightness(0.7);
+      object-fit: cover; z-index: -2; opacity: 0; transition: 1s;
     }
 
     .overlay {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      background: radial-gradient(circle, transparent 20%, black 120%);
-      z-index: -1;
+      background: rgba(0,0,0,0.4); z-index: -1;
     }
 
-    /* الحاوية الرئيسية */
     .container {
       min-height: 100vh; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 20px;
-      opacity: 0; transform: scale(0.9); transition: 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+      align-items: center; justify-content: center; gap: 15px;
+      opacity: 0; transform: translateY(20px); transition: 1s;
     }
 
     .profile {
-      width: 120px; height: 120px; border-radius: 50%;
+      width: 110px; height: 110px; border-radius: 50%;
       border: 2px solid #fff; object-fit: cover;
-      box-shadow: 0 0 25px rgba(255,255,255,0.2);
     }
 
-    h1 { 
-      font-size: 2.5rem; letter-spacing: 4px; 
-      text-shadow: 0 0 20px rgba(255,255,255,0.6);
-      margin-bottom: 5px;
-    }
+    h1 { font-size: 2rem; margin-top: 10px; text-shadow: 0 0 10px #fff; }
 
-    .links { display: flex; flex-direction: column; gap: 12px; }
+    .links { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
 
     .link {
-      width: 300px; padding: 15px; border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.1); color: #fff; 
-      background: rgba(255,255,255,0.05); text-decoration: none; 
-      display: flex; gap: 15px; align-items: center; justify-content: center;
-      backdrop-filter: blur(12px); transition: 0.4s;
-      font-weight: 500;
+      width: 280px; padding: 12px; border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.2); color: #fff; 
+      background: rgba(255,255,255,0.1); text-decoration: none; 
+      display: flex; gap: 10px; align-items: center; justify-content: center;
+      backdrop-filter: blur(10px); transition: 0.3s;
     }
 
-    .link:hover { 
-      background: rgba(255,255,255,0.15); 
-      border-color: #fff; 
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-    }
+    .link:hover { background: rgba(255,255,255,0.2); transform: scale(1.02); }
 
     .blink { animation: blink 2s infinite; }
-    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.1; } }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
   </style>
 </head>
 <body>
 
   <div id="enter-screen" onclick="startApp()">
-    <div class="blink">[ CLICK TO IGNITE ]</div>
+    <div class="blink">[ CLICK TO ENTER ]</div>
   </div>
 
   <video id="bgVid" loop playsinline>
-    <source src="https://cdn.pixabay.com/video/2023/10/20/185805-876380126_large.mp4" type="video/mp4">
+    <source src="mp4.mp4" type="video/mp4">
   </video>
 
   <div class="overlay"></div>
@@ -102,26 +87,24 @@
 
   <script>
     function startApp() {
-      const entry = document.getElementById('enter-screen');
-      entry.style.opacity = '0';
-      
+      document.getElementById('enter-screen').style.opacity = '0';
       setTimeout(() => {
-        entry.style.display = 'none';
+        document.getElementById('enter-screen').style.display = 'none';
         const v = document.getElementById('bgVid');
         const main = document.getElementById('main');
         
         v.style.opacity = '1';
         main.style.opacity = '1';
-        main.style.transform = 'scale(1)';
+        main.style.transform = 'translateY(0)';
         
-        v.muted = false; // تشغيل الصوت المصاحب للفيديو
-        v.play();
-      }, 600);
+        v.muted = false; // تشغيل الصوت
+        v.play().catch(error => console.log("Video play failed:", error));
+      }, 500);
     }
 
     function copyDiscord(){
       navigator.clipboard.writeText(".3.en");
-      alert("تم نسخ الديسكورد 🏎️💨");
+      alert("تم نسخ الديسكورد 🔥");
     }
   </script>
 

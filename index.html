@@ -3,64 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>iSKiLL</title>
+  <title>iSKiLL | Bio</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     body {
       margin: 0; padding: 0;
-      background: black; color: white; font-family: Arial;
+      background: black; color: white; font-family: 'Segoe UI', Tahoma, sans-serif;
       min-height: 100vh; overflow: hidden;
     }
-    
-    /* شاشة الدخول ضرورية لتشغيل الصوت */
+
+    /* شاشة الدخول - ضرورية لتفعيل الصوت */
     #enter-screen {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: black; z-index: 9999; display: flex;
-      flex-direction: column; justify-content: center; align-items: center;
-      cursor: pointer; font-size: 1.5rem; letter-spacing: 5px;
-    }
-    
-    .bg-video {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      object-fit: cover; z-index: -2; opacity: 0; transition: opacity 1s;
-    }
-    
-    .overlay {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      background: rgba(0,0,0,0.5); z-index: -1;
-    }
-    
-    .container {
-      min-height: 100vh; display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 18px; opacity: 0; transition: 1s;
-    }
-    
-    .profile {
-      width: 110px; height: 110px;
-      border-radius: 50%; border: 3px solid #fff;
-      object-fit: cover; margin-bottom: 10px;
-    }
-    
-    h1 { margin-bottom: 13px; letter-spacing:2px; text-shadow: 0 0 10px rgba(255,255,255,0.5);}
-    
-    .link {
-      width: 250px; padding: 13px; border-radius: 12px;
-      border: 2px solid #fff; color: #fff; background:rgba(255,255,255,0.1);
-      text-decoration: none; display: flex; gap: 12px;
-      align-items: center; justify-content: center;
-      backdrop-filter: blur(5px); transition: 0.3s;
-    }
-    
-    .link:hover { background: rgba(255,255,255,0.2); transform: scale(1.05); }
-    
-    .spotify-player {
-      margin: 25px 0 0 0; border-radius: 18px; overflow: hidden;
-      max-width: 350px;
+      justify-content: center; align-items: center;
+      cursor: pointer; font-size: 1.2rem; letter-spacing: 5px;
+      text-transform: uppercase; transition: 0.8s;
     }
 
-    @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
-    .blink { animation: blink 1.5s infinite; }
+    /* فيديو الخلفية */
+    video {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      object-fit: cover; z-index: -2; opacity: 0; transition: 1.5s;
+    }
+
+    .overlay {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.6); z-index: -1;
+    }
+
+    /* محتوى الصفحة */
+    .container {
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 15px;
+      opacity: 0; transform: translateY(20px); transition: 1.5s;
+    }
+
+    .profile {
+      width: 110px; height: 110px; border-radius: 50%;
+      border: 2px solid #fff; object-fit: cover; margin-bottom: 5px;
+      box-shadow: 0 0 15px rgba(255,255,255,0.3);
+    }
+
+    h1 { font-size: 2rem; margin-bottom: 10px; letter-spacing: 3px; text-shadow: 0 0 10px #fff; }
+
+    .links { display: flex; flex-direction: column; gap: 12px; }
+
+    .link {
+      width: 280px; padding: 14px; border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.2); color: #fff; 
+      background: rgba(255,255,255,0.05); text-decoration: none; 
+      display: flex; gap: 12px; align-items: center; justify-content: center;
+      backdrop-filter: blur(10px); transition: 0.3s;
+    }
+
+    .link:hover { 
+      background: rgba(255,255,255,0.15); 
+      border-color: #fff; 
+      transform: translateY(-3px);
+    }
+
+    /* أنيميشن النص */
+    .blink { animation: blink 2s infinite; }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
   </style>
 </head>
 <body>
@@ -69,39 +74,45 @@
     <div class="blink">[ CLICK TO ENTER ]</div>
   </div>
 
-  <video id="myVideo" class="bg-video" loop playsinline>
-    <source src="https://drive.google.com/uc?export=download&id=1WQ9h8EnbTGzF4l1JhOsv_SrEGbbKDX18" type="video/mp4">
+  <video id="bgVid" loop playsinline>
+    <source src="https://cdn.pixabay.com/video/2021/09/01/87103-596489435_large.mp4" type="video/mp4">
   </video>
 
   <div class="overlay"></div>
 
-  <div class="container" id="main-content">
+  <div class="container" id="main">
     <img src="https://i.pinimg.com/736x/8a/80/e5/8a80e55720977462058b76c94314120b.jpg" class="profile" alt="Profile">
     <h1>iSKiLL</h1>
-    <a class="link" href="https://instagram.com/i.1gw" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-    <a class="link" href="https://snapchat.com/add/i.1gw" target="_blank"><i class="fab fa-snapchat"></i> Snapchat</a>
-    <a class="link" href="https://tiktok.com/@.0l9o" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
-    <a class="link" href="#" onclick="copyDiscord()"><i class="fab fa-discord"></i> Discord: .3.en</a>
     
-    <div class="spotify-player">
-      <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/7pFTpiYeSCfkmLeERh21M7?utm_source=generator&theme=0"
-        width="100%" height="80" frameBorder="0" allowfullscreen=""
-        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"></iframe>
+    <div class="links">
+        <a class="link" href="https://instagram.com/i.1gw" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+        <a class="link" href="https://snapchat.com/add/i.1gw" target="_blank"><i class="fab fa-snapchat"></i> Snapchat</a>
+        <a class="link" href="https://tiktok.com/@.0l9o" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+        <a class="link" href="#" onclick="copyDiscord()"><i class="fab fa-discord"></i> Discord: .3.en</a>
     </div>
   </div>
 
   <script>
     function startApp() {
-      document.getElementById('enter-screen').style.display = 'none';
+      // إخفاء شاشة الدخول
+      const entry = document.getElementById('enter-screen');
+      entry.style.opacity = '0';
       
-      const video = document.getElementById('myVideo');
-      const content = document.getElementById('main-content');
-      
-      video.style.opacity = '1';
-      content.style.opacity = '1';
-      
-      video.muted = false;
-      video.play();
+      setTimeout(() => {
+        entry.style.display = 'none';
+        
+        const v = document.getElementById('bgVid');
+        const main = document.getElementById('main');
+        
+        // إظهار الفيديو والمحتوى
+        v.style.opacity = '1';
+        main.style.opacity = '1';
+        main.style.transform = 'translateY(0)';
+        
+        // تشغيل الفيديو بالصوت
+        v.muted = false; 
+        v.play();
+      }, 500);
     }
 
     function copyDiscord(){
@@ -109,5 +120,6 @@
       alert("تم نسخ الديسكورد 🔥");
     }
   </script>
+
 </body>
 </html>

@@ -11,31 +11,39 @@
       background: black; color: white; font-family: Arial;
       min-height: 100vh; overflow: hidden;
     }
-    /* شاشة الدخول لتفعيل الصوت */
+    
+    /* شاشة الدخول ضرورية لتشغيل الصوت */
     #enter-screen {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: black; z-index: 9999; display: flex;
-      justify-content: center; align-items: center;
-      cursor: pointer; font-size: 1.2rem; letter-spacing: 5px;
+      flex-direction: column; justify-content: center; align-items: center;
+      cursor: pointer; font-size: 1.5rem; letter-spacing: 5px;
     }
+    
     .bg-video {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      object-fit: cover; z-index: -2; opacity: 0; transition: 1s;
+      object-fit: cover; z-index: -2; opacity: 0; transition: opacity 1s;
     }
+    
     .overlay {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
       background: rgba(0,0,0,0.5); z-index: -1;
     }
+    
     .container {
       min-height: 100vh; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 18px;
-      opacity: 0; transition: 1.5s;
+      align-items: center; justify-content: center;
+      gap: 18px; opacity: 0; transition: 1s;
     }
+    
     .profile {
-      width: 110px; height: 110px; border-radius: 50%;
-      border: 3px solid #fff; object-fit: cover; margin-bottom: 10px;
+      width: 110px; height: 110px;
+      border-radius: 50%; border: 3px solid #fff;
+      object-fit: cover; margin-bottom: 10px;
     }
+    
     h1 { margin-bottom: 13px; letter-spacing:2px; text-shadow: 0 0 10px rgba(255,255,255,0.5);}
+    
     .link {
       width: 250px; padding: 13px; border-radius: 12px;
       border: 2px solid #fff; color: #fff; background:rgba(255,255,255,0.1);
@@ -43,44 +51,57 @@
       align-items: center; justify-content: center;
       backdrop-filter: blur(5px); transition: 0.3s;
     }
-    .link:hover { background: rgba(255,255,255,0.2); transform: scale(1.05); color:#00ffea; border-color:#00ffea; }
     
+    .link:hover { background: rgba(255,255,255,0.2); transform: scale(1.05); }
+    
+    .spotify-player {
+      margin: 25px 0 0 0; border-radius: 18px; overflow: hidden;
+      max-width: 350px;
+    }
+
+    @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
     .blink { animation: blink 1.5s infinite; }
-    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
   </style>
 </head>
 <body>
 
-  <div id="enter-screen" onclick="startSite()">
+  <div id="enter-screen" onclick="startApp()">
     <div class="blink">[ CLICK TO ENTER ]</div>
   </div>
 
-  <video id="bgVid" class="bg-video" loop playsinline>
-    <source src="https://social-bio-video.vercel.app/api/video?id=1WQ9h8EnbTGzF4l1JhOsv_SrEGbbKDX18" type="video/mp4">
+  <video id="myVideo" class="bg-video" loop playsinline>
+    <source src="https://drive.google.com/uc?export=download&id=1WQ9h8EnbTGzF4l1JhOsv_SrEGbbKDX18" type="video/mp4">
   </video>
 
   <div class="overlay"></div>
 
-  <div class="container" id="content">
+  <div class="container" id="main-content">
     <img src="https://i.pinimg.com/736x/8a/80/e5/8a80e55720977462058b76c94314120b.jpg" class="profile" alt="Profile">
-    <h1> iSKiLL </h1>
-    <a class="link" href="https://instagram.com/i.1gw" target="_blank"><i class="fab fa-instagram"></i> Instagram </a>
-    <a class="link" href="https://snapchat.com/add/i.1gw" target="_blank"><i class="fab fa-snapchat"></i> Snapchat </a>
-    <a class="link" href="https://tiktok.com/@.0l9o" target="_blank"><i class="fab fa-tiktok"></i> TikTok </a>
-    <a class="link" href="#" onclick="copyDiscord()"><i class="fab fa-discord"></i> Discord </a>
+    <h1>iSKiLL</h1>
+    <a class="link" href="https://instagram.com/i.1gw" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+    <a class="link" href="https://snapchat.com/add/i.1gw" target="_blank"><i class="fab fa-snapchat"></i> Snapchat</a>
+    <a class="link" href="https://tiktok.com/@.0l9o" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+    <a class="link" href="#" onclick="copyDiscord()"><i class="fab fa-discord"></i> Discord: .3.en</a>
+    
+    <div class="spotify-player">
+      <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/7pFTpiYeSCfkmLeERh21M7?utm_source=generator&theme=0"
+        width="100%" height="80" frameBorder="0" allowfullscreen=""
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"></iframe>
+    </div>
   </div>
 
   <script>
-    function startSite() {
-      document.getElementById('enter-screen').style.opacity = '0';
-      setTimeout(() => {
-        document.getElementById('enter-screen').style.display = 'none';
-        const v = document.getElementById('bgVid');
-        v.style.opacity = '1';
-        document.getElementById('content').style.opacity = '1';
-        v.muted = false; // تشغيل الصوت
-        v.play();
-      }, 500);
+    function startApp() {
+      document.getElementById('enter-screen').style.display = 'none';
+      
+      const video = document.getElementById('myVideo');
+      const content = document.getElementById('main-content');
+      
+      video.style.opacity = '1';
+      content.style.opacity = '1';
+      
+      video.muted = false;
+      video.play();
     }
 
     function copyDiscord(){
